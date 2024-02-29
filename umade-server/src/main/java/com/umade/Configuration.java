@@ -5,7 +5,7 @@
 package com.umade;
 
 import com.google.gson.Gson;
-import com.umade.utils.database.VouchersDAO;
+import com.umade.utils.database.*;
 
 /**
  *
@@ -22,5 +22,5 @@ public class Configuration {
     public static final String CONNECTION_URL = "jdbc:sqlserver://" + HOST + ";database=" + DATABASE + ";user=" + USER + ";password=" + PASS + ";encrypt=true;trustServerCertificate=true;loginTimeout=30;";
 
     public static VouchersDAO vouchers;
-
+    public static UsersDAO users;
 }

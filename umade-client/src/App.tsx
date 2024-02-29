@@ -2,6 +2,7 @@ import React from 'react'
 import './App.css'
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 import VouchersPage from './pages/Vouchers'
+import SignUpPage from './pages/Authentication/signUp'
 import { ThemeProvider, createTheme } from '@mui/material'
 import { green, orange, purple, red, yellow } from '@mui/material/colors'
 
@@ -34,6 +35,7 @@ function App() {
 				<Routes>
 					<Route path="/" />
 					<Route path="/vouchers" Component={VouchersPage} />
+					<Route path="/signUp" Component={SignUpPage} />
 				</Routes>
 			</Router>
 		</ThemeProvider>
