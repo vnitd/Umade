@@ -84,7 +84,6 @@ function Copyright(props) {
 			isError = true
 			message = 'Mật khẩu nhập lại không khớp'
 		}
-		
 		setIsError({ ...isError, [field]: isError })
 		setError({
 			...error,
@@ -96,19 +95,24 @@ function Copyright(props) {
 		setValues({...values, [event.target.name]: event.target.value})
 		validateInput(event.target.name, event.target.value)
 		// console.log(values)
+	
 	}
-
-
+	
+	
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 		const data = new FormData(event.currentTarget);
-		
 		const resp = await axios.put(`api/changePassword?email=${data.get('email')}&oldPassword=${data.get('oldPassword')}&newPassword=${data.get('newPassword')}`)
-		// console.log(resp.data)
-		if(resp.data.get('newPassword') !== resp.data.get('renewPassword')){
-			console.log(data.get('newPassword'))
+		console.log(resp.data)
+		console.log(resp.data.status)
+		if(resp.data.status !== 1){
+			toast.success('Đổi mật khẩu thành công')
+		}
+		else{
+			toast.error('Đổi mật khẩu thất bại, vui lòng thử lại')
 		}
 	};
+	
   
 	return (
 	//   <ThemeProvider theme={defaultTheme}>

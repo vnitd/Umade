@@ -28,7 +28,6 @@ public class ChangePasswordController extends HttpServlet{
         String oldPassword = req.getParameter("oldPassword");
         String newPassword = req.getParameter("newPassword");
         
-                
         if (dbContext.passwordChecker(email, oldPassword)) {
             out.print(new StatusDto(0, "Mật khẩu đã khớp"));
             int affectedRow = dbContext.changePassword(email,newPassword);
