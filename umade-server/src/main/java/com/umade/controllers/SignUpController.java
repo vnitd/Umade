@@ -23,8 +23,6 @@ public class SignUpController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         super.doGet(req, resp);
     }
-    
-    
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -41,7 +39,7 @@ public class SignUpController extends HttpServlet {
         if (dbContext.isExist(email)) {
             out.print(new StatusDto(1, "Email đã được đăng ký"));
         } else {
-            dbContext.add(username, email, phone, password, gender, defectType, address);
+            dbContext.add(username, email, password, phone, gender, defectType, address);
             out.print(new StatusDto(0, null));
         }
     }
