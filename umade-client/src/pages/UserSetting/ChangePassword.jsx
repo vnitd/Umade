@@ -3,24 +3,16 @@ import {
 	Button,
 	CssBaseline,
 	TextField,
-	Grid,
 	Box,
 	Typography,
 	Container,
-	MenuItem,
-	FormControl,
 	useTheme,
-	colors,
 } from '@mui/material'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import { useState } from 'react'
-import { useNavigate, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import axios from 'axios'
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import { blue, orange, purple } from '@mui/material/colors'
 
 //Footer copyright
 function Copyright(props) {
@@ -28,17 +20,13 @@ function Copyright(props) {
 	  <Typography variant="body2" color="text.secondary" align="center" {...props}>
 		{'Copyright © '}
 		<Link color="inherit" href="https://mui.com/">
-		  Your Website
+		  @Umade
 		</Link>{' '}
 		{new Date().getFullYear()}
 		{'.'}
 	  </Typography>
 	);
   }
-  
-  // TODO remove, this demo shouldn't need to reset the theme.
-  
-//   const defaultTheme = createTheme();
   
   export default function ChangePassword() {
 
@@ -67,7 +55,6 @@ function Copyright(props) {
 	const validateInput = (field, value) => {
 		let message =''
 		let isError = false
-		const tempPass = ''
 		if(field == 'email' && !emailRegex.test(value)){
 			isError = true
 			message = 'Email không hợp lệ!'
@@ -94,11 +81,8 @@ function Copyright(props) {
 	const handleChange = (event) => {
 		setValues({...values, [event.target.name]: event.target.value})
 		validateInput(event.target.name, event.target.value)
-		// console.log(values)
 	
 	}
-	
-	
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 		const data = new FormData(event.currentTarget);
@@ -112,10 +96,7 @@ function Copyright(props) {
 			toast.error('Đổi mật khẩu thất bại, vui lòng thử lại')
 		}
 	};
-	
-  
 	return (
-	//   <ThemeProvider theme={defaultTheme}>
 		<Container component="main" maxWidth="xs">
 		  <CssBaseline />
 		  <Box
@@ -197,11 +178,9 @@ function Copyright(props) {
 			  >
 				Đổi mật khẩu
 			  </Button>
-			  
 			</Box>
 		  </Box>
 		  <Copyright sx={{ mt: 8, mb: 4 }} />
 		</Container>
-	//   </ThemeProvider>
 	);
   }
