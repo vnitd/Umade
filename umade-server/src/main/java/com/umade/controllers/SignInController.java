@@ -24,11 +24,11 @@ public class SignInController extends HttpServlet{
         String password = req.getParameter("password");
         
         if(!dbContext.isExist(email)){
-            out.print(new StatusDto(1,"Email has not been registered in the system, Please enter again!"));
+            out.print(new StatusDto(1,"Email chưa từng được đăng ký trong hệ thống. Vui lòng nhập lại!"));
 //            return;
         }else{
-            if (!dbContext.passwordChecker(email, password)){
-                out.print(new StatusDto(1,"Password is not correct"));
+            if (!dbContext.passwordCheck(email, password)){
+                out.print(new StatusDto(1,"Mật khẩu không chính xác!"));
             }else{
                 out.print(new StatusDto(0,null));
             }

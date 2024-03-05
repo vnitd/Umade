@@ -42,7 +42,7 @@ function SignInPage(){
 		password: false,
 	})
 	const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
-	// const navigateTo = useNavigate()
+	const navigateTo = useNavigate()
 	const theme = useTheme()
 
 	const validateInput = (field, value) => {
@@ -95,8 +95,9 @@ function SignInPage(){
 			const res = await axios.post('api/signIn', values)
 			if (res.data.status === 0) {
 				toast.success(
-					'Đăng nhập thành công',
+					'Đăng nhập thành công'
 				)
+				navigateTo("/");
 			} else {
 				toast.error(res.data.result)
 			}
@@ -145,7 +146,7 @@ function SignInPage(){
 						<Grid item>
 							{/* Redirect to Sign In page*/}
 							<Typography variant="body1">
-								<Link to="/">Forgot password ?</Link>
+								<Link to="/">Quên mật khẩu?</Link>
 							</Typography>
 						</Grid>
 					    </Grid>
@@ -166,16 +167,15 @@ function SignInPage(){
 							/>
 						</Grid>
 					</Grid>
-					<Link to="/">
-						<Button
-							type="submit"
-							fullWidth
-							variant="contained"
-							sx={{ mt: 3, mb: 2 }}
+
+					<Button
+						type="submit"
+						fullWidth
+						variant="contained"
+						sx={{ mt: 3, mb: 2 }}
 					>
 						Đăng nhập
-						</Button>
-					</Link>
+					</Button>
 				</Box>
 			</Box>
 			<Copyright sx={{ mt: 5 }} />
