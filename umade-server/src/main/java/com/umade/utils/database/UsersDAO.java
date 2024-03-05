@@ -36,15 +36,4 @@ public class UsersDAO extends SQLDatabase{
                 " (name, email, password, phone, gender, defectType, address, role) VALUES (?, ?, ?, ?, ?, ?, ?, 'guest')",     // When a new user sign up, role will be 'guest' by default
                 name, email, password, phone, gender, defectType, address);
     }
-    
-    public boolean checkPassword(String email, String password){
-        ResultSet rs = executeQueryPreparedStatement("SELECT * FROM " + table + " WHERE email = ?",email);
-        
-        try {
-            return password.equals(rs.getNString("password"));
-        } catch (SQLException ex) {
-            Logger.getLogger(UsersDAO.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
-        }
-    }
 }
