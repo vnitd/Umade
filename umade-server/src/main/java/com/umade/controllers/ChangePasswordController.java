@@ -15,23 +15,23 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(name = "ChangePasswordController", urlPatterns = {"/api/changePassword"})
-public class ChangePasswordController extends HttpServlet{
-    
+@WebServlet(name = "ChangePasswordController", urlPatterns = { "/api/changePassword" })
+public class ChangePasswordController extends HttpServlet {
     private static final UsersDAO dbContext = Configuration.users;
+
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out = resp.getWriter();
-        
+
         String email = req.getParameter("email");
         String oldPassword = req.getParameter("oldPassword");
         String newPassword = req.getParameter("newPassword");
         if (dbContext.passwordCheck(email, oldPassword)) {
             out.print(new StatusDto(0, "Mật khẩu đã khớp"));
-            dbContext.changePassword(email,newPassword);
+            dbContext.changePassword(email, newPassword);
         } else {
             out.print(new StatusDto(1, null));
         }
     }
-    
+
 }
