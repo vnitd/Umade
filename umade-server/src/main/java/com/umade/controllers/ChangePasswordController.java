@@ -7,7 +7,6 @@ package com.umade.controllers;
 import com.umade.Configuration;
 import com.umade.models.dto.StatusDto;
 import com.umade.utils.database.UsersDAO;
-import com.umade.utils.database.VouchersDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -27,15 +26,9 @@ public class ChangePasswordController extends HttpServlet{
         String email = req.getParameter("email");
         String oldPassword = req.getParameter("oldPassword");
         String newPassword = req.getParameter("newPassword");
-        
-        if (dbContext.passwordChecker(email, oldPassword)) {
+        if (dbContext.passwordCheck(email, oldPassword)) {
             out.print(new StatusDto(0, "Mật khẩu đã khớp"));
-            int affectedRow = dbContext.changePassword(email,newPassword);
-            if(affectedRow == 1){
-                out.print(new StatusDto(0, "Mật khẩu đã đổi thành công"));
-            }else{
-                out.print(new StatusDto(1, "Không đổi được"));
-            }
+            dbContext.changePassword(email,newPassword);
         } else {
             out.print(new StatusDto(1, null));
         }
