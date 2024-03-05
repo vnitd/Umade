@@ -2,6 +2,7 @@
 package com.umade.controllers;
 
 import com.umade.Configuration;
+import com.umade.models.dto.StatusDto;
 import com.umade.utils.database.UsersDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -23,12 +24,14 @@ public class SignInController extends HttpServlet{
         String password = req.getParameter("password");
         
         if(!dbContext.isExist(email)){
-            out.print("Email has not been registered in the system, Please enter again!");
-            return;
-        }
-        
-        if(!dbContext.checkPassword(email, password)){
-            out.print("Password is incorrect");
+            out.print(new StatusDto(1,"Email has not been registered in the system, Please enter again!"));
+//            return;
+        }else{
+            if (!dbContext.passwordChecker(email, password)){
+                out.print(new StatusDto(1,"Password is not correct"));
+            }else{
+                out.print(new StatusDto(0,null));
+            }
         }
     }
 
