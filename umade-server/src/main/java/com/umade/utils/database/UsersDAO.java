@@ -11,18 +11,18 @@ import java.util.logging.Logger;
  *
  * @author hoang hung
  */
-public class UsersDAO extends SQLDatabase{
+public class UsersDAO extends SQLDatabase {
     private String table;
-    
+
     public UsersDAO(Connection connection) {
         super(connection);
     }
-    
+
     public boolean isExist(String email) {
         ResultSet rs = executeQueryPreparedStatement("SELECT * FROM users WHERE email=?", email);
-        
+
         try {
-            if (rs != null && rs.next()) 
+            if (rs != null && rs.next())
                 return true;
         } catch (SQLException ex) {
             Logger.getLogger(SQLDatabase.class.getName()).log(Level.SEVERE, null, ex);
@@ -30,30 +30,42 @@ public class UsersDAO extends SQLDatabase{
         }
         return false;
     }
-    
-    public void add(String name, String email, String password, String phone, String gender, String defectType, String address) {
+
+    public void add(String name, String email, String password, String phone, String gender, String defectType,
+            String address) {
         executePreparedStatement("INSERT INTO " + table +
-                " (name, email, password, phone, gender, defectType, address, role) VALUES (?, ?, ?, ?, ?, ?, ?, 'guest')",     // When a new user sign up, role will be 'guest' by default
+                " (name, email, password, phone, gender, defectType, address, role) VALUES (?, ?, ?, ?, ?, ?, ?, 'guest')", // When
+                                                                                                                            // a
+                                                                                                                            // new
+                                                                                                                            // user
+                                                                                                                            // sign
+                                                                                                                            // up,
+                                                                                                                            // role
+                                                                                                                            // will
+                                                                                                                            // be
+                                                                                                                            // 'guest'
+                                                                                                                            // by
+                                                                                                                            // default
                 name, email, password, phone, gender, defectType, address);
     }
-        public boolean passwordChecker(String email, String newPassword){
-        ResultSet rs = executeQueryPreparedStatement("SELECT * FROM " + table + " WHERE email = ?", email);
-        try{
-            if(rs.next()){
-                String currentPassword = rs.getString("password");
-                if(newPassword.equals(currentPassword)){
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-        }   catch (SQLException ex){
-            Logger.getLogger(SQLDatabase.class.getName()).log(Level.SEVERE, null, ex);
 
+    public boolean passwordCheck(String email, String inputPassword) {
+        ResultSet rs = executeQueryPreparedStatement("SELECT * FROM " + table + " WHERE email = ?", email);
+
+        try {
+            if (rs.next()) {
+                String currentPassword = rs.getString("password");
+                return inputPassword.equals(currentPassword);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SQLDatabase.class.getName()).log(Level.SEVERE, null, ex);
         }
+
         return false;
     }
-    public int changePassword(String email, String newPassword){
+
+    public int changePassword(String email, String newPassword) {
+
         return executeUpdatePreparedStatement("UPDATE " + table + " SET password=? WHERE email=?", newPassword, email);
     }
 }
