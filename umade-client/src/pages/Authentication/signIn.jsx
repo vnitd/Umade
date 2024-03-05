@@ -166,14 +166,16 @@ function SignInPage(){
 							/>
 						</Grid>
 					</Grid>
-					<Button
-						type="submit"
-						fullWidth
-						variant="contained"
-						sx={{ mt: 3, mb: 2 }}
+					<Link to="/">
+						<Button
+							type="submit"
+							fullWidth
+							variant="contained"
+							sx={{ mt: 3, mb: 2 }}
 					>
 						Đăng nhập
-					</Button>
+						</Button>
+					</Link>
 				</Box>
 			</Box>
 			<Copyright sx={{ mt: 5 }} />
