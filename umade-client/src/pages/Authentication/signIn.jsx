@@ -67,7 +67,6 @@ function SignInPage(){
 	const handleChange = (event) => {
 		setValues({ ...values, [event.target.name]: event.target.value })
 		validateInput(event.target.name, event.target.value)
-		console.log(values)
 	}
 
 	const validateOnSubmit = () => {
@@ -144,7 +143,6 @@ function SignInPage(){
 						</Grid>
                         <Grid container justifyContent="flex-end">
 						<Grid item>
-							{/* Redirect to Sign In page*/}
 							<Typography variant="body1">
 								<Link to="/">Quên mật khẩu?</Link>
 							</Typography>

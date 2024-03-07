@@ -25,7 +25,6 @@ public class SignInController extends HttpServlet{
         
         if(!dbContext.isExist(email)){
             out.print(new StatusDto(1,"Email chưa từng được đăng ký trong hệ thống. Vui lòng nhập lại!"));
-//            return;
         }else{
             if (!dbContext.passwordCheck(email, password)){
                 out.print(new StatusDto(1,"Mật khẩu không chính xác!"));
