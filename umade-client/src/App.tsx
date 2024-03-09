@@ -6,7 +6,9 @@ import SignUpPage from './pages/Authentication/signUp'
 import { ThemeProvider, createTheme } from '@mui/material'
 import { green, orange, purple, red, yellow } from '@mui/material/colors'
 import ChangePassword from './pages/UserSetting/ChangePassword'
-
+import ForgotPassword from './pages/Authentication/ForgotPassword'
+import OTPForm from './pages/Authentication/OTPForm'
+import ResetPassword from './pages/Authentication/ResetPassword'
 const theme = createTheme({
 	palette: {
 		primary: purple,
@@ -38,6 +40,10 @@ function App() {
 					<Route path="/vouchers" Component={VouchersPage} />
 					<Route path="/signUp" Component={SignUpPage} />
 					<Route path="/changePassword" Component={ChangePassword} />
+					<Route path="/forgotPassword" Component={ForgotPassword} />
+					<Route path="/otpForm" Component={OTPForm} />
+					<Route path="/resetPassword" Component={ResetPassword} />
+
 				</Routes>
 			</Router>
 		</ThemeProvider>
