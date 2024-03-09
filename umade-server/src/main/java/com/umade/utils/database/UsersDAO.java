@@ -20,7 +20,6 @@ public class UsersDAO extends SQLDatabase {
 
     public boolean isExist(String email) {
         ResultSet rs = executeQueryPreparedStatement("SELECT * FROM users WHERE email=?", email);
-
         try {
             if (rs != null && rs.next())
                 return true;
