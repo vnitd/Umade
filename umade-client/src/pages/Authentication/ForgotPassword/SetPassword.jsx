@@ -83,8 +83,6 @@ function SetPassword({ email }) {
 						onChange={handleEdit}
 						type={showPassword ? 'text' : 'password'}
 						sx={{ marginBottom: 4 }}
-						color={error ? '' : 'primary'}
-						helperText={error}
 						endAdornment={
 							<InputAdornment position="end">
 								<IconButton

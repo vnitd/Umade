@@ -43,7 +43,7 @@ public class UsersDAO extends SQLDatabase {
                         rs.getNString("name"),
                         rs.getString("email"),
                         rs.getString("phone"),
-                        null,
+                        "(Not Available)",
                         rs.getString("role"),
                         rs.getString("gender"),
                         rs.getNString("address"),

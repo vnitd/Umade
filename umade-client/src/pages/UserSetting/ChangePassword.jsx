@@ -13,10 +13,10 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import axios from 'axios'
-import '@fontsource/roboto/300.css';
-import '@fontsource/roboto/400.css';
-import '@fontsource/roboto/500.css';
-import '@fontsource/roboto/700.css';
+import '@fontsource/roboto/300.css'
+import '@fontsource/roboto/400.css'
+import '@fontsource/roboto/500.css'
+import '@fontsource/roboto/700.css'
 //Footer copyright
 function Copyright(props) {
 	return (
@@ -61,18 +61,18 @@ export default function ChangePassword() {
 	const validateInput = (field, value) => {
 		let message = ''
 		let isError = false
-		if (field == 'email' && !emailRegex.test(value)) {
+		if (field === 'email' && !emailRegex.test(value)) {
 			isError = true
 			message = 'Email không hợp lệ!'
-		} else if (field == 'oldPassword' && value.length <= 8) {
+		} else if (field === 'oldPassword' && value.length <= 8) {
 			isError = true
 			message = 'Mật khẩu cần nhiều hơn 8 kí tự'
-		} else if (field == 'newPassword' && value.length <= 8) {
+		} else if (field === 'newPassword' && value.length <= 8) {
 			isError = true
 			message = 'Mật khẩu cần nhiều hơn 8 kí tự'
-		} else if (field == 'newPassword' && value.length > 8) {
+		} else if (field === 'newPassword' && value.length > 8) {
 			setNewPassword(value)
-		} else if (field == 'renewPassword' && value !== newPassword) {
+		} else if (field === 'renewPassword' && value !== newPassword) {
 			isError = true
 			message = 'Mật khẩu nhập lại không khớp'
 		}
