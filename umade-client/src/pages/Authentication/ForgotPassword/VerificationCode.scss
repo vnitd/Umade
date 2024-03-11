@@ -1,0 +1,18 @@
+input.otp-code[type='number'] {
+	width: 2.5rem;
+	height: 2.5rem;
+	font-size: 1.75rem;
+	margin: 0.5rem;
+	text-align: center;
+	border: 1px solid gray;
+	caret-color: transparent;
+	border-radius: 0.5rem;
+	&::-webkit-outer-spin-button,
+	&::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
+	/* Firefox */
+	-moz-appearance: textfield;
+	appearance: textfield;
+}

@@ -5,6 +5,7 @@
 package com.umade.controllers;
 
 import com.umade.Configuration;
+import com.umade.models.User;
 import com.umade.models.dto.StatusDto;
 import com.umade.utils.DateFormatting;
 import com.umade.utils.Gmail;
@@ -30,9 +31,9 @@ import java.util.logging.Logger;
 @WebServlet(name = "ForgotPasswordController", urlPatterns = {"/api/forgotPassword"})
 
 public class ForgotPassword extends HttpServlet {
-    
+
     private final UsersDAO dbContext = Configuration.users;
-    
+
     private void sendVerificationMail(String email, String subject, int id, String code) {
         try {
             new Gmail(email)
@@ -43,7 +44,7 @@ public class ForgotPassword extends HttpServlet {
                     .appendMacro("ID", id + "")
                     .appendMacro("WHEN", DateFormatting.format(new Date()))
                     .appendMacro("CODE", code)
-                    .sendTemplate(new URL("https://localhost:8080/templates/gmail_code.jsp"));
+                    .sendTemplate(new URL("http://localhost:8080/templates/gmail_code.jsp"));
         } catch (MalformedURLException ex) {
             Logger.getLogger(ForgotPassword.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -53,22 +54,47 @@ public class ForgotPassword extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String cmd = req.getParameter("cmd");
-        String receiveEmail = req.getParameter("receiveEmail");
         HttpSession mySession = req.getSession();
-        System.out.println(receiveEmail);
-        System.out.println(dbContext.isExist(receiveEmail));
         if (cmd.equals("1")) {
+            String receiveEmail = req.getParameter("receiveEmail");
             if (receiveEmail != null && dbContext.isExist(receiveEmail)) {
                 String otpvalue = RandomGenerator.randString(RandomGenerator.NUMERIC_CHARACTER, 6);
-                
-                sendVerificationMail(receiveEmail, "Email xác nhận Khôi phục mật khẩu", 0, otpvalue);
-                
+                User user = dbContext.getUserFromEmail(receiveEmail);
+
+                new Thread(() -> {
+                    sendVerificationMail(receiveEmail, "Verification code", user.getId(), otpvalue);
+                }).start();
+
                 mySession.setAttribute(receiveEmail, otpvalue);
                 resp.getWriter().print(new StatusDto(0, "Gửi mã OTP thành công"));
             } else {
                 resp.getWriter().print(new StatusDto(1, "Gửi mã OTP thất bại"));
             }
+        } else if (cmd.equals("2")) {
+            String email = req.getParameter("email");
+            String otp = req.getParameter("code");
+            String code = (String) mySession.getAttribute(email);
+
+            if (otp.equals(code)) {
+                resp.getWriter().print(new StatusDto(0, "Mã xác nhận chính xác!"));
+            } else {
+                resp.getWriter().print(new StatusDto(1, "Sai mã xác nhận!"));
+            }
+        } else if (cmd.equals("3")) {
+            String email = req.getParameter("email");
+            String password = req.getParameter("password");
+            try {
+                int affectRow = dbContext.changePassword(email, password);
+                if (affectRow > 0) {
+                    resp.getWriter().print(new StatusDto(0, "Đổi mật khẩu thành công"));
+                } else {
+                    resp.getWriter().print(new StatusDto(1, "Phiên làm việc đã hết hạn"));
+                }
+            } catch (IOException e) {
+                resp.getWriter().print(new StatusDto(1, "Thất bại"));
+
+            }
         }
     }
-    
+
 }

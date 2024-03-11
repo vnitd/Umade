@@ -17,11 +17,15 @@
             .container {
                 max-width: 600px;
                 margin: 50px auto;
-                padding: 50px 0;
                 padding-bottom: 10px;
                 background-color: white;
                 border-radius: 12.5px;
                 box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+                padding: 0 0 25px 0;
+            }
+            .img-header {
+                padding: 0 0 0 0;
+                text-align: center;
             }
             h1 {
                 color: #7b1fa2;
@@ -83,7 +87,9 @@
     <body>
         <div class="body">
             <div class="container">
-                <img src=""/>
+                <div class="img-header">
+                    <img src="https://github.com/vnitd/Umade/blob/main/logo.png?raw=true" width="100"/>
+                </div>
                 <h1>Yêu cầu xác minh</h1>
                 <div class="inside-content">
                     <p class="body1">Vui lòng xác thực yêu cầu Khôi phục mật khẩu của bạn</p>

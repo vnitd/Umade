@@ -14,6 +14,7 @@ import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import axios from 'axios'
+import { useCookies } from 'react-cookie'
 
 function Copyright(props) {
 	return (
@@ -41,6 +42,7 @@ function SignInPage() {
 		email: false,
 		password: false,
 	})
+	const [, setCookie] = useCookies(['userData'])
 	const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
 	const navigateTo = useNavigate()
 	const theme = useTheme()
@@ -95,6 +97,7 @@ function SignInPage() {
 			if (res.data.status === 0) {
 				toast.success('Đăng nhập thành công')
 				navigateTo('/')
+				setCookie('userData', res.data.result)
 			} else {
 				toast.error(res.data.result)
 			}

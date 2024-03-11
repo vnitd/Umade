@@ -9,8 +9,6 @@ import SignInPage from './pages/Authentication/signIn'
 
 import ChangePassword from './pages/UserSetting/ChangePassword'
 import ForgotPassword from './pages/Authentication/ForgotPassword'
-import OTPForm from './pages/Authentication/OTPForm'
-import ResetPassword from './pages/Authentication/ResetPassword'
 
 const theme = createTheme({
 	palette: {
@@ -46,8 +44,6 @@ function App() {
 					<Route path="/sign-in" Component={SignInPage} />
 					<Route path="/change-password" Component={ChangePassword} />
 					<Route path="/forgot-password" Component={ForgotPassword} />
-					<Route path="/otp-form" Component={OTPForm} />
-					<Route path="/reset-password" Component={ResetPassword} />
 				</Routes>
 			</Router>
 		</ThemeProvider>
