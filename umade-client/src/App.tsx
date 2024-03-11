@@ -7,6 +7,11 @@ import { ThemeProvider, createTheme } from '@mui/material'
 import { green, orange, purple, red, yellow } from '@mui/material/colors'
 import SignInPage from './pages/Authentication/signIn'
 
+import ChangePassword from './pages/UserSetting/ChangePassword'
+import ForgotPassword from './pages/Authentication/ForgotPassword'
+import OTPForm from './pages/Authentication/OTPForm'
+import ResetPassword from './pages/Authentication/ResetPassword'
+
 const theme = createTheme({
 	palette: {
 		primary: purple,
@@ -34,10 +39,15 @@ function App() {
 		<ThemeProvider theme={theme}>
 			<Router>
 				<Routes>
+					{/* Should rather use kebab-case for links */}
 					<Route path="/" />
 					<Route path="/vouchers" Component={VouchersPage} />
-					<Route path="/signUp" Component={SignUpPage} />
-					<Route path="/signIn" Component={SignInPage} />
+					<Route path="/sign-up" Component={SignUpPage} />
+					<Route path="/sign-in" Component={SignInPage} />
+					<Route path="/change-password" Component={ChangePassword} />
+					<Route path="/forgot-password" Component={ForgotPassword} />
+					<Route path="/otp-form" Component={OTPForm} />
+					<Route path="/reset-password" Component={ResetPassword} />
 				</Routes>
 			</Router>
 		</ThemeProvider>

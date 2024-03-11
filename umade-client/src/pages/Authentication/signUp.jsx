@@ -25,7 +25,7 @@ function Copyright(props) {
 			align="center"
 			{...props}
 		>
-			{'Copyright © by Umade ' + new Date().getFullYear() + '.'}
+			{'Copyright © by KST ' + new Date().getFullYear() + '.'}
 		</Typography>
 	)
 }
@@ -57,7 +57,7 @@ function SignUpPage() {
 		defectType: '',
 	})
 	const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
-	const phoneRegex = /^0\d{9}$/
+	const phoneRegex = /^0\d{9,10}$/
 	const navigateTo = useNavigate()
 	const theme = useTheme()
 
@@ -117,8 +117,9 @@ function SignUpPage() {
 			const res = await axios.post('api/signUp', values)
 			if (res.data.status === 0) {
 				toast.success(
-					'Đăng ký thành công! Vui lòng đăng nhập để sử dụng',
+					'Đăng ký thành công! Vui lòng đăng nhập để tiếp tục',
 				)
+				navigateTo('/sign-in')
 			} else {
 				toast.error(res.data.result)
 			}
@@ -276,7 +277,8 @@ function SignUpPage() {
 						<Grid item>
 							{/* Redirect to Sign In page*/}
 							<Typography variant="body1">
-								Đã có tài khoản?<Link to="/">Đăng nhập</Link>
+								Đã có tài khoản?&nbsp;
+								<Link to="/sign-in">Đăng nhập</Link>
 							</Typography>
 						</Grid>
 					</Grid>
