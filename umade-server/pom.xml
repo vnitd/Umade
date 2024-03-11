@@ -31,6 +31,11 @@
             <artifactId>mssql-jdbc</artifactId>
             <version>12.3.0.jre17-preview</version>
         </dependency>
+        <dependency>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>jakarta.mail</artifactId>
+            <version>2.0.1</version>
+        </dependency>
     </dependencies>
     
     <build>

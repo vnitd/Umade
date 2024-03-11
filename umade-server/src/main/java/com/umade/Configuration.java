@@ -20,6 +20,7 @@ public class Configuration {
     private static final String USER = "sa";
     private static final String PASS = "1";
     public static final String CONNECTION_URL = "jdbc:sqlserver://" + HOST + ";database=" + DATABASE + ";user=" + USER + ";password=" + PASS + ";encrypt=true;trustServerCertificate=true;loginTimeout=30;";
+    public static String templatePath;
 
     public static VouchersDAO vouchers;
     public static UsersDAO users;

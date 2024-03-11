@@ -23,19 +23,19 @@ function Copyright(props) {
 			align="center"
 			{...props}
 		>
-			{'Copyright © by Umade ' + new Date().getFullYear() + '.'}
+			{'Copyright © by KST ' + new Date().getFullYear() + '.'}
 		</Typography>
 	)
 }
 
-function SignInPage(){
-    const [values, setValues] = useState({
+function SignInPage() {
+	const [values, setValues] = useState({
 		email: '',
-		password: ''
+		password: '',
 	})
 	const [errors, setErrors] = useState({
 		email: '',
-		password: ''
+		password: '',
 	})
 	const [isError, setIsError] = useState({
 		email: false,
@@ -52,7 +52,7 @@ function SignInPage(){
 		if (field === 'email' && !emailRegex.test(value)) {
 			isError = true
 			message = 'Email không hợp lệ'
-		}else if (field === 'password' && value.length <= 8) {
+		} else if (field === 'password' && value.length <= 8) {
 			isError = true
 			message = 'Mật khẩu phải nhiều hơn 8 ký tự'
 		}
@@ -93,10 +93,8 @@ function SignInPage(){
 		} else {
 			const res = await axios.post('api/signIn', values)
 			if (res.data.status === 0) {
-				toast.success(
-					'Đăng nhập thành công'
-				)
-				navigateTo("/");
+				toast.success('Đăng nhập thành công')
+				navigateTo('/')
 			} else {
 				toast.error(res.data.result)
 			}
@@ -141,13 +139,15 @@ function SignInPage(){
 								color={isError.email ? '' : 'success'}
 							/>
 						</Grid>
-                        <Grid container justifyContent="flex-end">
-						<Grid item>
-							<Typography variant="body1">
-								<Link to="/">Quên mật khẩu?</Link>
-							</Typography>
+						<Grid container justifyContent="flex-end">
+							<Grid item>
+								<Typography variant="body1">
+									<Link to="/forgot-password">
+										Quên mật khẩu?
+									</Link>
+								</Typography>
+							</Grid>
 						</Grid>
-					    </Grid>
 						<Grid item xs={12}>
 							<TextField
 								autoComplete="given-password"
@@ -175,6 +175,10 @@ function SignInPage(){
 						Đăng nhập
 					</Button>
 				</Box>
+				<Typography variant="body1">
+					Chưa có tài khoản? Đi tới&nbsp;
+					<Link to="/sign-up">Đăng ký</Link>
+				</Typography>
 			</Box>
 			<Copyright sx={{ mt: 5 }} />
 		</Container>

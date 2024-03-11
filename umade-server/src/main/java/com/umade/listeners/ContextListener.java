@@ -4,6 +4,7 @@
  */
 package com.umade.listeners;
 
+import com.umade.Configuration;
 import com.umade.utils.DatabaseConnection;
 import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;
@@ -23,6 +24,8 @@ public class ContextListener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         System.out.println("Web server started!");
+        String workingPath = sce.getServletContext().getRealPath("/");
+        Configuration.templatePath = workingPath.concat("templates");
         try {
             DatabaseConnection.setDaoConnection();
         } catch (NoSuchMethodException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchFieldException ex) {
