@@ -56,7 +56,7 @@ function SignUpPage() {
 		gender: false,
 		defectType: '',
 	})
-	const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+	const emailRegex = /^(?!.*[.]{2})[a-zA-Z0-9._%+-]+@(?:(?!.*[.]{2})[a-zA-Z0-9.-])+[a-zA-Z]{2,}$/
 	const phoneRegex = /^0\d{9}$/
 	const navigateTo = useNavigate()
 	const theme = useTheme()
