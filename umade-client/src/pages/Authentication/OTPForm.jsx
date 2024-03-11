@@ -46,7 +46,7 @@ function OTPForm() {
 	const handleChange = (event) => {
 		setOTP(event.target.value)
 	}
-	const handleOTP = async(event) => {
+	const handleOTP = async (event) => {
 		event.preventDefault()
 		const res = await axios.post('api/validateOTP', {
 			otp: OTP,
@@ -54,20 +54,19 @@ function OTPForm() {
 		console.log(res.data)
 		if (res.data.status === 0) {
 			toast.success('Mã OTP chính xác')
-			setTimeout (()=>{
-				navigate("/resetPassword")
+			setTimeout(() => {
+				navigate('/resetPassword')
 			}, 1000)
 		} else {
 			toast.error('Mã OTP không chính xác')
 		}
 	}
-	
+
 	return (
 		<Container>
 			<CssBaseline>
 				<Paper elevation={10} style={paperStyle}>
 					<Box
-						
 						display="flex"
 						justifyContent="center"
 						alignItems="center"
@@ -79,19 +78,14 @@ function OTPForm() {
 							alt=""
 						/>
 					</Box>
-					<Box p={5} component='form'
-						onSubmit={handleOTP}
-						noValidate>
+					<Box p={5} component="form" onSubmit={handleOTP} noValidate>
 						<Grid
 							container
 							direction="column"
 							alignItems="center"
 							justify="center"
 						>
-							<Typography
-								variant="h6"
-								gutterBottom
-							>
+							<Typography variant="h6">
 								Xác thực mã OTP
 							</Typography>
 							<TextField
