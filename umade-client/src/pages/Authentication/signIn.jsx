@@ -42,7 +42,7 @@ function SignInPage() {
 		email: false,
 		password: false,
 	})
-	const [, setCookie] = useCookies(['userData'])
+	const [cookie, setCookie] = useCookies(['userData'])
 	const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
 	const navigateTo = useNavigate()
 	const theme = useTheme()

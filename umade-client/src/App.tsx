@@ -9,6 +9,7 @@ import SignInPage from './pages/Authentication/signIn'
 
 import ChangePassword from './pages/UserSetting/ChangePassword'
 import ForgotPassword from './pages/Authentication/ForgotPassword'
+import ChangeInformation from './pages/UserSetting/ChangeInformation'
 
 const theme = createTheme({
 	palette: {
@@ -44,6 +45,7 @@ function App() {
 					<Route path="/sign-in" Component={SignInPage} />
 					<Route path="/change-password" Component={ChangePassword} />
 					<Route path="/forgot-password" Component={ForgotPassword} />
+					<Route path="/change-information" Component={ChangeInformation} />
 				</Routes>
 			</Router>
 		</ThemeProvider>

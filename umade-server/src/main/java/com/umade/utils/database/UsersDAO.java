@@ -80,8 +80,38 @@ public class UsersDAO extends SQLDatabase {
         return false;
     }
 
+    public boolean isExistPhone(int id, String phone){
+        ResultSet rs = executeQueryPreparedStatement("SELECT * FROM " + table + " WHERE id = ?", id);
+        try {
+            if(rs.next()){
+                String currentPhone = rs.getString("phone");
+                return phone.equals(currentPhone);
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(SQLDatabase.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return false;
+    }
+
+    public boolean isExistEmail(int id, String email){
+        ResultSet rs = executeQueryPreparedStatement("SELECT * FROM " + table + " WHERE id = ?", id);
+        try {
+            if(rs.next()){
+                String currentEmail = rs.getString("email");
+                return currentEmail.equalsIgnoreCase(currentEmail);
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(SQLDatabase.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return false;
+    }
+
     public int changePassword(String email, String newPassword) {
 
         return executeUpdatePreparedStatement("UPDATE " + table + " SET password=? WHERE email=?", newPassword, email);
+    }
+
+    public int changeInformation(int id, User user){
+        return executeUpdatePreparedStatement("UPDATE " + table + " SET name=?, phone=?, gender=?, email=?, address=? WHERE id=?", user.getName(), user.getPhone(), user.getGender(), user.getEmail(), user.getAddress(), id);
     }
 }
